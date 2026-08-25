@@ -45,5 +45,19 @@ internal class Program
         // d) What is a static class? Can you create an object from a static class?
         // => A class that contains only static members. No, you cannot create an object from a static class.
         #endregion
+
+        #region Question4
+        // a) What is an Extension Method?
+        // => A feature that allows you to add new methods to existing types without modifying the original code.
+
+        // b)  What keyword must be used in the first parameter of an extension method?
+        // => The (this) keyword
+
+        // c) Where must an extension method be declared?
+        // => Inside a top-level static class
+
+        // d) Can an extension method access private members of the class it extends?
+        // => No, it can only access public members of the extended class
+        #endregion
     }
 }
