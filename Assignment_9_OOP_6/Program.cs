@@ -59,5 +59,19 @@ internal class Program
         // d) Can an extension method access private members of the class it extends?
         // => No, it can only access public members of the extended class
         #endregion
+
+        #region Question5
+        // a) What is a Partial Class?
+        // => A class whose definition can be split across multiple physical files.
+
+        // b) Why would a developer split one class into multiple files?
+        // => To allow multiple developers to work on the same class at the same time
+
+        // c) What is a Partial Method?
+        // => A method whose declaration is defined in one part of a partial class
+
+        // d) What happens if a declared partial method has no implementation?
+        // => The compiler safely removes the method declaration and all calls to it
+        #endregion
     }
 }
