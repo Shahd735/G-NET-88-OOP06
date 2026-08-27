@@ -73,5 +73,132 @@ internal class Program
         // d) What happens if a declared partial method has no implementation?
         // => The compiler safely removes the method declaration and all calls to it
         #endregion
+
+        #region Question6
+        Console.WriteLine("=================================================");
+        Console.WriteLine("Smart Delivery Management System");
+        Console.WriteLine("=================================================");
+        Console.WriteLine();
+
+        int initialCount = Shipment.GetTotalShipmentsCreated();
+
+        Console.WriteLine();
+        Console.WriteLine("=================================================");
+        Console.WriteLine("Creating Shipments...");
+        Console.WriteLine("=================================================");
+        Console.WriteLine();
+
+        DeliveryAddress sharedAddress = new DeliveryAddress("Cairo", "Tahrir", 15);
+
+        StandardShipment s1 = new StandardShipment("SH001", "Laptop", 3m, 80m, sharedAddress);
+        Console.WriteLine("Standard Shipment Created");
+
+        ExpressShipment s2 = new ExpressShipment("SH002", "Mobile Phone", 2m, 60m, sharedAddress, 30m);
+        Console.WriteLine("Express Shipment Created");
+
+        InternationalShipment s3 = new InternationalShipment("SH003", "Television", 8m, 120m, sharedAddress, "Germany", 100m);
+        Console.WriteLine("International Shipment Created");
+
+        Console.WriteLine();
+        Console.WriteLine($"Total Shipments Created : {Shipment.GetTotalShipmentsCreated()}");
+        Console.WriteLine();
+
+        Console.WriteLine("=================================================");
+        Console.WriteLine("Object Copying");
+        Console.WriteLine("=================================================");
+        Console.WriteLine();
+
+        Shipment refShipment = s1;
+        Console.WriteLine($"Original Shipment   : {s1.TrackingCode}");
+        Console.WriteLine($"Assigned Shipment   : {refShipment.TrackingCode}");
+        Console.WriteLine();
+        Console.WriteLine($"Same Object : {object.ReferenceEquals(s1, refShipment)}");
+        Console.WriteLine();
+
+        Console.WriteLine("-------------------------------------------------");
+        Console.WriteLine("Shallow Copy");
+        Console.WriteLine("-------------------------------------------------");
+        Console.WriteLine();
+
+        Shipment shallowCopied = s1.ShallowCopy();
+
+        Console.WriteLine($"Original Shipment Address : {s1.Destination.City}");
+        Console.WriteLine($"Copied Shipment Address   : {shallowCopied.Destination.City}");
+        Console.WriteLine();
+        Console.WriteLine("Changing copied shipment address...");
+        shallowCopied.Destination.City = "Giza";
+        Console.WriteLine();
+
+        Console.WriteLine($"Original Shipment Address : {s1.Destination.City}");
+        Console.WriteLine($"Copied Shipment Address   : {shallowCopied.Destination.City}");
+        Console.WriteLine();
+        Console.WriteLine($"Same DeliveryAddress Object : {object.ReferenceEquals(s1.Destination, shallowCopied.Destination)}");
+        Console.WriteLine();
+
+        Console.WriteLine("-------------------------------------------------");
+        Console.WriteLine("Deep Copy");
+        Console.WriteLine("-------------------------------------------------");
+        Console.WriteLine();
+
+        s1.Destination.City = "Cairo";
+
+        Shipment deepCopied = s1.DeepCopy();
+
+        Console.WriteLine($"Original Shipment Address : {s1.Destination.City}");
+        Console.WriteLine($"Copied Shipment Address   : {deepCopied.Destination.City}");
+        Console.WriteLine();
+        Console.WriteLine("Changing copied shipment address...");
+        deepCopied.Destination.City = "Giza";
+        Console.WriteLine();
+
+        Console.WriteLine($"Original Shipment Address : {s1.Destination.City}");
+        Console.WriteLine($"Copied Shipment Address   : {deepCopied.Destination.City}");
+        Console.WriteLine();
+        Console.WriteLine($"Same DeliveryAddress Object : {object.ReferenceEquals(s1.Destination, deepCopied.Destination)}");
+        Console.WriteLine();
+
+        Console.WriteLine("=================================================");
+        Console.WriteLine("Extension Methods");
+        Console.WriteLine("=================================================");
+        Console.WriteLine();
+
+        Console.WriteLine(s1.GetSummary());
+        Console.WriteLine(s2.GetSummary());
+        Console.WriteLine(s3.GetSummary());
+        Console.WriteLine();
+        Console.WriteLine($"{s1.TrackingCode} Is Delivered : {s1.IsDelivered()}");
+        Console.WriteLine($"{s3.TrackingCode} Is Delivered : {s3.IsDelivered()}");
+        Console.WriteLine();
+
+        Console.WriteLine("=================================================");
+        Console.WriteLine("Tracking Status");
+        Console.WriteLine("=================================================");
+        Console.WriteLine();
+
+        s1.UpdateTrackingStatus("Out For Delivery");
+        Console.WriteLine();
+
+        Console.WriteLine("=================================================");
+        Console.WriteLine("Static Utilities");
+        Console.WriteLine("=================================================");
+        Console.WriteLine();
+
+        DeliveryUtilities.PrintSystemTitle();
+        Console.WriteLine();
+        Console.WriteLine($"Total Shipments Created : {Shipment.GetTotalShipmentsCreated()}");
+        Console.WriteLine();
+
+        Console.WriteLine("=================================================");
+        Console.WriteLine("Partial Method");
+        Console.WriteLine("=================================================");
+        Console.WriteLine();
+
+        s3.UpdateTrackingStatus("Delivered");
+        Console.WriteLine();
+
+        Console.WriteLine("=================================================");
+        Console.WriteLine("Assignment Completed");
+        Console.WriteLine("=================================================");
+        #endregion
     }
 }
